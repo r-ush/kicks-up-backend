@@ -34,7 +34,7 @@ const deleteUser=(id)=>{
   });
 }
 
-deleteUser('9nBG4En4i3N6N3Vz4vV9')
+// deleteUser('9nBG4En4i3N6N3Vz4vV9')
 
 //  addUser('hey','hey@gmail.com')
 
