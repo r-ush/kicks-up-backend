@@ -9,14 +9,24 @@ admin.initializeApp({
   
 let db = admin.firestore();
 
-  let docRef = db.collection('Users').doc('alovelace');
+  //add to db
+let userdb = db.collection('Users');
 
-let setAda = docRef.set({
-  first: 'Ada',
-  last: 'Lovelace',
-  born: 1815
-});
+const addUser=(name,email)=>{
+  let newUser=userdb.add({
+    cart:[],
+    createdAt:new Date(),
+    email,
+    name
+  })
+  .catch((err)=>{
+    console.log('error addUser',err)
+  });
+}
 
+addUser('test','test@gmail.com')
+
+//read from db
 db.collection('Users').get()
   .then((snapshot) => {
     snapshot.forEach((doc) => {
