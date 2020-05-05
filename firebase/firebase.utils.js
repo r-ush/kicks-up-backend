@@ -10,12 +10,12 @@ admin.initializeApp({
 let db = admin.firestore();
 
   //add to db
-let userdb = db.collection('Users');
-
-const addUser=(name,email)=>{
-  let newUser=userdb.add({
-    cart:[],
-    createdAt:new Date(),
+  let userdb = db.collection('Users');
+  
+  const addUser=(name,email)=>{
+    let newUser=userdb.add({
+      cart:[],
+      createdAt:new Date(),
     email,
     name
   })
@@ -26,9 +26,19 @@ const addUser=(name,email)=>{
     console.log('error addUser',err)
   });
 }
+const deleteUser=(id)=>{
+  let deleteDoc = userdb.doc(id).delete().then(()=>{
+    console.log('deleted',id)
+  }).catch((err)=>{
+    console.log('Could not delete user',err)
+  });
+}
+
+deleteUser('9nBG4En4i3N6N3Vz4vV9')
 
 //  addUser('hey','hey@gmail.com')
 
 module.exports={
-  addUser
+  addUser,
+  deleteUser
 }
