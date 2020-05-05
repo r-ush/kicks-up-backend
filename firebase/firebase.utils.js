@@ -6,7 +6,7 @@ admin.initializeApp({
 	credential: admin.credential.cert(serviceAccount),
 	databaseURL: "https://kicks-up.firebaseio.com"
 });
-  
+
 let db = admin.firestore();
 
   //add to db
@@ -19,20 +19,16 @@ const addUser=(name,email)=>{
     email,
     name
   })
+  .then(()=>{
+    console.log('user succesfully added')
+  })
   .catch((err)=>{
     console.log('error addUser',err)
   });
 }
 
-addUser('test','test@gmail.com')
+//  addUser('hey','hey@gmail.com')
 
-//read from db
-db.collection('Users').get()
-  .then((snapshot) => {
-    snapshot.forEach((doc) => {
-      console.log(doc.id, '=>', doc.data());
-    });
-  })
-  .catch((err) => {
-    console.log('Error getting documents', err);
-  });
+module.exports={
+  addUser
+}
