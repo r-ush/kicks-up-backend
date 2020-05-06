@@ -84,7 +84,22 @@ const getAllProducts=()=>{
   });
 }
 
+const getProductsByField=(field,value)=>{
+  let query = productsdb.where(field, '==', value).get()
+  .then(snapshot => {
+    if (snapshot.empty) {
+      console.log('No results found.');
+      return;
+    }  
 
+    snapshot.forEach(doc => {
+      console.log(doc.id, '=>', doc.data());
+    });
+  })
+  .catch(err => {
+    console.log('Error getting documents', err);
+  });
+}
 
 
 //productdb end
@@ -98,9 +113,14 @@ const getAllProducts=()=>{
 // removeFromCart('S7wLw6HrL1Nu9coM2ld8', 'DryiVHYTrMUUinxZjh7j')
 
 // productdb
-getAllProducts()
+// getAllProducts()
+// getProductsByField('gender','male') //male,female
+// getProductsByField('type','sport') //sport, sneakers...
+// getProductsByField('brand','Nike') //Nike,Adidas,Reebok, Woodland
+// getProductsByField('color','red') //red,black,blue
 
 //FUNCTIONS END
+
 module.exports={
   addUser,
   deleteUser,
