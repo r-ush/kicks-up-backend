@@ -36,9 +36,41 @@ const deleteUser=(id)=>{
   });
 }
 
+//add to cart
+const addToCart=(userId,productId)=>{
+  user=userdb.doc(userId)
+  let arrUnion = user.update({
+    cart: admin.firestore.FieldValue.arrayUnion(String(productId))
+  })
+  .then(()=>{
+    console.log('added product to cart =>',productId)
+  })
+  .catch((err)=>{
+    console.log('error adding to cart', err)
+  });
+}
+
+// remove from cart
+const removeFromCart=(userId,productId)=>{
+  user=userdb.doc(userId)
+  let arrRm = user.update({
+    cart: admin.firestore.FieldValue.arrayRemove(String(productId))
+  })
+  .then(()=>{
+    console.log('removed product from cart =>',productId)
+  })
+  .catch((err)=>{
+    console.log('error removing from cart', err)
+  });;
+}
+
 // deleteUser('9nBG4En4i3N6N3Vz4vV9')
 
 //  addUser('new user','new@gmail.com')
+
+// addToCart('S7wLw6HrL1Nu9coM2ld8', 'DryiVHYTrMUUinxZjh7j');
+
+// removeFromCart('S7wLw6HrL1Nu9coM2ld8', 'DryiVHYTrMUUinxZjh7j')
 
 module.exports={
   addUser,
