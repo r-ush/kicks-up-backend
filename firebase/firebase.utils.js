@@ -9,7 +9,7 @@ admin.initializeApp({
 
 let db = admin.firestore();
 
-  //add to db
+  //add user to userdb
   let userdb = db.collection('Users');
   
   const addUser=(name,email)=>{
@@ -19,13 +19,15 @@ let db = admin.firestore();
     email,
     name
   })
-  .then(()=>{
-    console.log('user succesfully added')
+  .then((ref)=>{
+    console.log('user succesfully added with id:',ref.id)
   })
   .catch((err)=>{
     console.log('error addUser',err)
   });
 }
+
+//delete user from userdb
 const deleteUser=(id)=>{
   let deleteDoc = userdb.doc(id).delete().then(()=>{
     console.log('deleted',id)
@@ -36,7 +38,7 @@ const deleteUser=(id)=>{
 
 // deleteUser('9nBG4En4i3N6N3Vz4vV9')
 
-//  addUser('hey','hey@gmail.com')
+//  addUser('new user','new@gmail.com')
 
 module.exports={
   addUser,
