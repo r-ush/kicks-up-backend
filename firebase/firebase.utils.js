@@ -8,10 +8,11 @@ admin.initializeApp({
 });
 
 let db = admin.firestore();
+  
+  //userdb start
+  let userdb = db.collection('Users');
 
   //add user to userdb
-  let userdb = db.collection('Users');
-  
   const addUser=(name,email)=>{
     let newUser=userdb.add({
       cart:[],
@@ -26,8 +27,6 @@ let db = admin.firestore();
     console.log('error addUser',err)
   });
 }
-
-//userdb start
 
 //delete user from userdb
 const deleteUser=(id)=>{
@@ -72,6 +71,7 @@ const removeFromCart=(userId,productId)=>{
 
 let productsdb = db.collection('products')
 
+// fetch all products from db
 const getAllProducts=()=>{
   let allProducts = productsdb.get()
   .then(snapshot => {
@@ -84,6 +84,7 @@ const getAllProducts=()=>{
   });
 }
 
+// fetch products based on fields like gender, type color
 const getProductsByField=(field,value)=>{
   let query = productsdb.where(field, '==', value).get()
   .then(snapshot => {
@@ -101,6 +102,7 @@ const getProductsByField=(field,value)=>{
   });
 }
 
+// fetch products based on price range
 const getProductsByPrice=(operator,value)=>{
   let query = productsdb.where('price', operator, value).get()
   .then(snapshot => {
