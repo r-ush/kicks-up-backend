@@ -27,6 +27,8 @@ let db = admin.firestore();
   });
 }
 
+//userdb start
+
 //delete user from userdb
 const deleteUser=(id)=>{
   let deleteDoc = userdb.doc(id).delete().then(()=>{
@@ -64,17 +66,45 @@ const removeFromCart=(userId,productId)=>{
   });;
 }
 
+// userdb end
+
+//productdb start
+
+let productsdb = db.collection('products')
+
+const getAllProducts=()=>{
+  let allProducts = productsdb.get()
+  .then(snapshot => {
+    snapshot.forEach(product => {
+      console.log(product.id, '=>', product.data());
+    });
+  })
+  .catch(err => {
+    console.log('Error getting documents', err);
+  });
+}
+
+
+
+
+//productdb end
+
+// ALL FUNCTIONS
+
+// userdb
 // deleteUser('9nBG4En4i3N6N3Vz4vV9')
-
-//  addUser('new user','new@gmail.com')
-
+// addUser('new user','new@gmail.com')
 // addToCart('S7wLw6HrL1Nu9coM2ld8', 'DryiVHYTrMUUinxZjh7j');
-
 // removeFromCart('S7wLw6HrL1Nu9coM2ld8', 'DryiVHYTrMUUinxZjh7j')
 
+// productdb
+getAllProducts()
+
+//FUNCTIONS END
 module.exports={
   addUser,
   deleteUser,
   addToCart,
-  removeFromCart
+  removeFromCart,
+  getAllProducts
 }
