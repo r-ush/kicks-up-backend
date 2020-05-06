@@ -74,5 +74,7 @@ const removeFromCart=(userId,productId)=>{
 
 module.exports={
   addUser,
-  deleteUser
+  deleteUser,
+  addToCart,
+  removeFromCart
 }
