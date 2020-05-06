@@ -101,6 +101,22 @@ const getProductsByField=(field,value)=>{
   });
 }
 
+const getProductsByPrice=(operator,value)=>{
+  let query = productsdb.where('price', operator, value).get()
+  .then(snapshot => {
+    if (snapshot.empty) {
+      console.log('No results found.');
+      return;
+    }  
+
+    snapshot.forEach(doc => {
+      console.log(doc.id, '=>', doc.data());
+    });
+  })
+  .catch(err => {
+    console.log('Error getting documents', err);
+  });
+}
 
 //productdb end
 
@@ -118,6 +134,7 @@ const getProductsByField=(field,value)=>{
 // getProductsByField('type','sport') //sport, sneakers...
 // getProductsByField('brand','Nike') //Nike,Adidas,Reebok, Woodland
 // getProductsByField('color','red') //red,black,blue
+getProductsByPrice('=',15000) //'<','<=','=','>','>='
 
 //FUNCTIONS END
 
@@ -126,5 +143,7 @@ module.exports={
   deleteUser,
   addToCart,
   removeFromCart,
-  getAllProducts
+  getAllProducts,
+  getProductsByField,
+  getProductsByPrice
 }
