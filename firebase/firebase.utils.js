@@ -12,6 +12,24 @@ let db = admin.firestore();
   //userdb start
   let userdb = db.collection('Users');
 
+  //fetch user data
+  const getUserByEmail=(findEmail)=>{
+    let query = userdb.where('email', '==',findEmail).get()
+  .then(snapshot => {
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+
+    snapshot.forEach(user => {
+      console.log(user.id, '=>', user.data());
+    });
+  })
+  .catch(err => {
+    console.log('Error getting documents', err);
+  });
+  }
+
   //add user to userdb
   const addUser=(name,email)=>{
     let newUser=userdb.add({
@@ -125,6 +143,7 @@ const getProductsByPrice=(operator,value)=>{
 // ALL FUNCTIONS
 
 // userdb
+// getUserByEmail('aarush.bhatt@gmail.com') //email address as a string
 // deleteUser('9nBG4En4i3N6N3Vz4vV9')
 // addUser('new user','new@gmail.com')
 // addToCart('S7wLw6HrL1Nu9coM2ld8', 'DryiVHYTrMUUinxZjh7j');
@@ -136,11 +155,12 @@ const getProductsByPrice=(operator,value)=>{
 // getProductsByField('type','sport') //sport, sneakers...
 // getProductsByField('brand','Nike') //Nike,Adidas,Reebok, Woodland
 // getProductsByField('color','red') //red,black,blue
-getProductsByPrice('=',15000) //'<','<=','=','>','>='
+// getProductsByPrice('=',15000) //'<','<=','=','>','>=' and numeric value as second
 
 //FUNCTIONS END
 
 module.exports={
+  getUserByEmail,
   addUser,
   deleteUser,
   addToCart,
