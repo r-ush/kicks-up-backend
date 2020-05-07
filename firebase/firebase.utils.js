@@ -18,7 +18,7 @@ let db = admin.firestore();
   .then(snapshot => {
     if (snapshot.empty) {
       console.log('No matching documents.');
-      return;
+      return('No matching documents.');
     }  
 
     snapshot.forEach(user => {
