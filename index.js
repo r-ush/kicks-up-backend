@@ -1,6 +1,10 @@
 const express=require('express')
-const { getUserByEmail,addUser,deleteUser,addToCart,removeFromCart} = require('./firebase/user.firebase')
-const { getAllProducts,getProductsByField,getProductsByPrice} = require('./firebase/products.firebase')
+
+const userRouter=require('./src/routers/user.router')
+const productRouter=require('./src/routers/product.router')
+
+const { getUserByEmail,addUser,deleteUser,addToCart,removeFromCart} = require('./src/firebase/user.firebase')
+const { getAllProducts,getProductsByField,getProductsByPrice} = require('./src/firebase/products.firebase')
 
 const app = express();
 const port= process.env.PORT || 3001
@@ -11,16 +15,13 @@ app.get('/', (req, res) => {
 	})
 });
 
-email='aarush.bhatt@gmail.com'
-app.get(`/user/${email}`,async(req,res)=>{
-	let data=await getUserByEmail(email)
-	console.log(data)
-	res.json({	email,
-		data
-	})
-})
-
 app.use(express.json())
+app.use('/users',userRouter)
+app.use('/products',productRouter)
+
+app.get('*',(req,res)=>{
+    res.status(404).send('Page not Found')
+})
  
 app.listen(port, () =>
 	console.log(`App listening on port ${port} !`),
