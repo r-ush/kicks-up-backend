@@ -23,6 +23,7 @@ let db = admin.firestore();
 
     snapshot.forEach(user => {
       console.log(user.id, '=>', user.data());
+      return (JSON.stringify(user.data()))                          //review
     });
   })
   .catch(err => {
