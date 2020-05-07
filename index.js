@@ -17,6 +17,7 @@ const port= process.env.PORT || 3001
 app.use(express.json())
 app.use('/users',userRouter)
 // app.use('/products',productRouter)
+app.use(express.urlencoded());
 
 app.get('*',(req,res)=>{
     res.status(404).send('Page not Found')

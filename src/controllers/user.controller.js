@@ -10,6 +10,17 @@ const getUser=async(req,res)=>{
 	})
 }
 
+const addNewUser=async(req, res) => {
+	const name  = req.body.name
+	const email  = req.body.email
+	console.log(req.body)
+		// data=await addUser(name,email)
+		// console.log('added')
+		// res.send(data)
+}
 
 
-module.exports={getUser}
+
+module.exports={getUser,addNewUser}
+
+//const {username,room}=Qs.parse(location.search,{ignoreQueryPrefix:true})

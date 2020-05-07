@@ -23,18 +23,21 @@ let getDoc = user.get()
 
   //add user to userdb
   const addUser=(name,email)=>{
-    let newUser=userdb.add({
-      cart:[],
-      createdAt:new Date(),
-    email,
-    name
-  })
-  .then((ref)=>{
-    console.log('user succesfully added with id:',ref.id)
-  })
-  .catch((err)=>{
-    console.log('error addUser',err)
-  });
+    return new Promise((resolve,reject)=>{
+      let newUser=userdb.add({
+        cart:[],
+        createdAt:new Date(),
+      email,
+      name
+    })
+    .then((ref)=>{
+      resolve('useradded: ',ref.name)
+      console.log('useradded: ',ref.id)
+    })
+    .catch((err)=>{
+      reject('error addUser',err)
+    });
+    })
 }
 
 //delete user from userdb
