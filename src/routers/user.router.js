@@ -1,9 +1,9 @@
 const express=require('express')
-const router = express.Router();
+const router = new express.Router();
 
-const getUser=require('../controllers/user.controller')
+const {getUser}=require('../controllers/user.controller')
 
-email='aarush.bhatt@gmail.com'
-router.get(`/${email}`,getUser)
+id='YNaf59ZHzYRPqZAHq9I5'
+router.get(`/${id}`,getUser)
 
 module.exports=router

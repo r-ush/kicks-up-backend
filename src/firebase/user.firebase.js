@@ -4,24 +4,20 @@ const {admin,db}=require('./firebase.utils')
   let userdb = db.collection('Users');
 
   //fetch user data
-const getUserByEmail=(findEmail)=>{
+const getUserById=(id)=>{
   return new Promise((resolve,reject)=>{
-    let query = userdb.where('email', '==',findEmail).get()
-    .then(snapshot => {
-      if (snapshot.empty) {
-        console.log('No matching documents.');
-        reject('No matching documents.');
-      }  
-  
-      snapshot.forEach(user => {
-        // console.log(user.id, '=>', user.data());
-        resolve (user.data())
-      });
-    })
-    .catch(err => {
-      console.log('Error getting documents', err);
-      reject('Error getting documents', err)
-    });
+    let user = userdb.doc(id);
+let getDoc = user.get()
+  .then(doc => {
+    if (!doc.exists) {
+      reject('No such document!');
+    } else {
+      resolve(doc.data());
+    }
+  })
+  .catch(err => {
+    reject('Error getting document', err);
+  });
   })
 }
 
@@ -88,9 +84,10 @@ const removeFromCart=(userId,productId)=>{
 // addUser('new user','new@gmail.com')
 // addToCart('S7wLw6HrL1Nu9coM2ld8', 'DryiVHYTrMUUinxZjh7j');
 // removeFromCart('S7wLw6HrL1Nu9coM2ld8', 'DryiVHYTrMUUinxZjh7j')
+// getUserById('YNaf59ZHzYRPqZAHq9I5')
 
 module.exports={
-	getUserByEmail,
+  getUserById,
 	addUser,
 	deleteUser,
 	addToCart,

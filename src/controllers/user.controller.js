@@ -1,9 +1,15 @@
 const express=require('express')
+const {getUserById,addUser,deleteUser,addToCart,removeFromCart} = require('../firebase/user.firebase')
+
 
 const getUser=async(req,res)=>{
-	// let data=await getUserByEmail(email)
-	// data=JSON.stringify(data)
-	res.status(200).send('data')
+	let data=await getUserById(id)
+	// console.log(data)
+	res.json({
+		data
+	})
 }
+
+
 
 module.exports={getUser}
