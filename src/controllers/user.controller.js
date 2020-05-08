@@ -3,7 +3,6 @@ const {getUserById,addUser,deleteUser,addToCart,removeFromCart} = require('../fi
 const getUser=async(req,res)=>{
 	const { id } = req.params;
 	let data=await getUserById(id)
-	// console.log(data)
 	res.json({
 		data
 	})

@@ -21,28 +21,44 @@ const getAllProducts=()=>{
   })
 }
 
-const getProduct=()=>{
+const getProduct=(id)=>{
   return new Promise((resolve,reject)=>{
-    
+    let product = productsdb.doc(id)
+    let getDoc = product.get()
+  .then(doc => {
+    if (!doc.exists) {
+      reject('No such document!');
+    } else {
+      resolve(doc.data());
+    }
   })
+  .catch(err => {
+    reject('Error getting document', err);
+  });
+})
 }
 
 // fetch products based on fields like gender, type color
 const getProductsByField=(field,value)=>{
-  let query = productsdb.where(field, '==', value).get()
-  .then(snapshot => {
-    if (snapshot.empty) {
-      console.log('No results found.');
-      return;
-    }  
-
-    snapshot.forEach(doc => {
-      console.log(doc.id, '=>', doc.data());
+  return new Promise ((resolve,reject)=>{
+    let filterProductarr=[]
+    let query = productsdb.where(field, '==', value).get()
+    .then(snapshot => {
+      if (snapshot.empty) {
+        reject('No results found.');
+        return;
+      }
+      snapshot.forEach(doc => {
+        filterProductarr.push(doc.id);
+      });
+    })
+    .then(()=>{
+      resolve(filterProductarr)
+    })
+    .catch(err => {
+      reject('Error getting documents', err);
     });
   })
-  .catch(err => {
-    console.log('Error getting documents', err);
-  });
 }
 
 // fetch products based on price range
@@ -78,5 +94,6 @@ const getProductsByPrice=(operator,value)=>{
 module.exports={
 	getAllProducts,
 	getProductsByField,
-	getProductsByPrice
+  getProductsByPrice,
+  getProduct
   }
