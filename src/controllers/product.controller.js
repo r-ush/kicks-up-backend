@@ -1,10 +1,15 @@
 const { getAllProducts,getProductsByField,getProductsByPrice,getProduct} = require('../firebase/products.firebase')
 
 const getAllProductsCtrl=async(req,res)=>{
-	let data=await getAllProducts()
-	res.send({
-		data
-	})
+	try{
+		let data=await getAllProducts()
+		res.send({
+			data
+		})
+	}catch(rejectedValue){
+		res.status(404).send(rejectedValue)
+	}
+
 }
 
 const getProductCtrl=async(req,res)=>{

@@ -2,23 +2,35 @@ const {getUserById,addUser,deleteUser,addToCart,removeFromCart} = require('../fi
 
 const getUser=async(req,res)=>{
 	const { id } = req.params;
-	let data=await getUserById(id)
-	res.json({
-		data
-	})
+	try{
+		let data=await getUserById(id)
+		res.json({
+			data
+		})
+	}catch(rejectedValue){
+		res.status(404).send(rejectedValue)
+	}
 }
 
 const addUserCtrl=async(req, res) => {
 	var name  = req.body.name
 	var email  = req.body.email
+	try{
 		data=await addUser(name,email)
 		res.send(data)
+	}catch(rejectedValue){
+		res.status(404).send(rejectedValue)
+	}
 }
 
 const deleteUserCtrl=async(req, res) => {
 	const { id } = req.params;
+	try{
 		data=await deleteUser(id)
 		res.send(data)
+	}catch(rejectedValue){
+		res.status(404).send(rejectedValue)
+	}
 }
 
 const addToCartCtrl=async(req,res)=>{
