@@ -33,10 +33,14 @@ const getProductsByFieldCtrl=async(req, res) => {
 }
 
 const getProductsByPriceCtrl=async(req, res) => {
-	// var name  = req.body.name
-	// var email  = req.body.email
-	// 	data=await addUser(name,email)
-	// 	res.send(data)
+	var operator  = req.body.operator
+	var value  = parseInt(req.body.value,10)
+	try{
+		let data=await getProductsByPrice(operator,value)
+		res.send(data)
+	}catch(rejectedValue){
+		res.status(404).send(rejectedValue)
+	}
 }
 
 module.exports={

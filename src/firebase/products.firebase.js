@@ -63,20 +63,26 @@ const getProductsByField=(field,value)=>{
 
 // fetch products based on price range
 const getProductsByPrice=(operator,value)=>{
-  let query = productsdb.where('price', operator, value).get()
-  .then(snapshot => {
-    if (snapshot.empty) {
-      console.log('No results found.');
-      return;
-    }  
-
-    snapshot.forEach(doc => {
-      console.log(doc.id, '=>', doc.data());
+  return new Promise ((resolve,reject)=>{
+    let filterProductarr=[]
+    let query = productsdb.where('price', operator, value).get()
+    .then(snapshot => {
+      if (snapshot.empty) {
+        reject('No results found.');
+        return;
+      }
+      snapshot.forEach(doc => {
+        filterProductarr.push(doc.id);
+      });
+    })
+    .then(()=>{
+      resolve(filterProductarr)
+      console.log(filterProductarr)
+    })
+    .catch(err => {
+      console.log('Error getting documents', err);
     });
   })
-  .catch(err => {
-    console.log('Error getting documents', err);
-  });
 }
 
 //productdb end

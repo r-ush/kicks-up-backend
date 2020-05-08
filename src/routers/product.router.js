@@ -6,6 +6,6 @@ const {getAllProductsCtrl,getProductCtrl,getProductsByFieldCtrl,getProductsByPri
 router.get('/all',getAllProductsCtrl)
 router.get('/:id',getProductCtrl)
 router.post('/filterbyfield',getProductsByFieldCtrl)
-// router.get('/:id/:prodid',getProductsByPriceCtrl)
+router.post('/filterbyprice',getProductsByPriceCtrl)
 
 module.exports=router
