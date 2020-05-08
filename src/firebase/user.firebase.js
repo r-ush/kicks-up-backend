@@ -31,8 +31,7 @@ let getDoc = user.get()
       name
     })
     .then((ref)=>{
-      resolve('useradded: ',ref.name)
-      console.log('useradded: ',ref.id)
+      resolve(`${name} has been succesfully added`)
     })
     .catch((err)=>{
       reject('error addUser',err)

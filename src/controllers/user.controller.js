@@ -3,6 +3,7 @@ const {getUserById,addUser,deleteUser,addToCart,removeFromCart} = require('../fi
 
 
 const getUser=async(req,res)=>{
+	const { id } = req.params;
 	let data=await getUserById(id)
 	// console.log(data)
 	res.json({
@@ -11,15 +12,11 @@ const getUser=async(req,res)=>{
 }
 
 const addNewUser=async(req, res) => {
-	const name  = req.body.name
-	const email  = req.body.email
-	console.log(req.body)
-		// data=await addUser(name,email)
-		// console.log('added')
-		// res.send(data)
+	var name  = req.body.name
+	var email  = req.body.email
+		data=await addUser(name,email)
+		res.send(data)
 }
-
-
 
 module.exports={getUser,addNewUser}
 
