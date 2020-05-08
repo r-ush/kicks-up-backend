@@ -5,15 +5,26 @@ let productsdb = db.collection('products')
 
 // fetch all products from db
 const getAllProducts=()=>{
-  let allProducts = productsdb.get()
-  .then(snapshot => {
-    snapshot.forEach(product => {
-      console.log(product.id, '=>', product.data());
+  return new Promise((resolve,reject)=>{
+    var allProductsarr=[]
+    let allProducts = productsdb.get()
+    .then(snapshot => {
+      snapshot.forEach(product => {
+        allProductsarr.push(product.id)
+      });
+    }).then(()=>{
+      resolve(allProductsarr)
+    })
+    .catch(err => {
+      reject('Error getting documents', err);
     });
   })
-  .catch(err => {
-    console.log('Error getting documents', err);
-  });
+}
+
+const getProduct=()=>{
+  return new Promise((resolve,reject)=>{
+    
+  })
 }
 
 // fetch products based on fields like gender, type color

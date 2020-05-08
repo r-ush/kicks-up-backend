@@ -1,6 +1,4 @@
-const express=require('express')
 const {getUserById,addUser,deleteUser,addToCart,removeFromCart} = require('../firebase/user.firebase')
-
 
 const getUser=async(req,res)=>{
 	const { id } = req.params;

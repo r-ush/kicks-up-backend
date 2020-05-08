@@ -3,7 +3,6 @@ var cors = require('cors')
 const userRouter=require('./src/routers/user.router')
 const productRouter=require('./src/routers/product.router')
 
-// const { getAllProducts,getProductsByField,getProductsByPrice} = require('./src/firebase/products.firebase')
 
 const app = express();
 const port= process.env.PORT || 3001
@@ -13,7 +12,7 @@ const port= process.env.PORT || 3001
 app.use(express.json());
 
 app.use('/users',userRouter)
-// app.use('/products',productRouter)
+app.use('/products',productRouter)
 
 
 // app.get('/', (req, res) => {

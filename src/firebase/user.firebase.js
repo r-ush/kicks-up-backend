@@ -101,5 +101,5 @@ module.exports={
 	addUser,
 	deleteUser,
 	addToCart,
-	removeFromCart,
+	removeFromCart
 }
