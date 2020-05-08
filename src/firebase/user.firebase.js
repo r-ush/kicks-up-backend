@@ -53,16 +53,18 @@ const deleteUser=(id)=>{
 
 //add to cart
 const addToCart=(userId,productId)=>{
-  user=userdb.doc(userId)
-  let arrUnion = user.update({
-    cart: admin.firestore.FieldValue.arrayUnion(String(productId))
+  return new Promise ((resolve,reject)=>{
+    user=userdb.doc(userId)
+    let arrUnion = user.update({
+      cart: admin.firestore.FieldValue.arrayUnion(String(productId))
+    })
+    .then(()=>{
+      resolve('added product to cart')
+    })
+    .catch((err)=>{
+      reject('error adding to cart', err)
+    });
   })
-  .then(()=>{
-    console.log('added product to cart =>',productId)
-  })
-  .catch((err)=>{
-    console.log('error adding to cart', err)
-  });
 }
 
 // remove from cart
