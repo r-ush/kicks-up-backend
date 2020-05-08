@@ -69,16 +69,19 @@ const addToCart=(userId,productId)=>{
 
 // remove from cart
 const removeFromCart=(userId,productId)=>{
-  user=userdb.doc(userId)
-  let arrRm = user.update({
-    cart: admin.firestore.FieldValue.arrayRemove(String(productId))
+  return new Promise((resolve,reject)=>{
+    user=userdb.doc(userId)
+    let arrRm = user.update({
+      cart: admin.firestore.FieldValue.arrayRemove(String(productId))
+    })
+    .then(()=>{
+      resolve('removed product from cart')
+    })
+    .catch((err)=>{
+      reject('error removing from cart', err)
+    });
   })
-  .then(()=>{
-    console.log('removed product from cart =>',productId)
-  })
-  .catch((err)=>{
-    console.log('error removing from cart', err)
-  });;
+
 }
 
 // userdb end

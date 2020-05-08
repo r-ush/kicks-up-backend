@@ -11,7 +11,7 @@ const getUser=async(req,res)=>{
 	})
 }
 
-const addUserctrl=async(req, res) => {
+const addUserCtrl=async(req, res) => {
 	var name  = req.body.name
 	var email  = req.body.email
 		data=await addUser(name,email)
@@ -32,6 +32,15 @@ const addToCartCtrl=async(req,res)=>{
 	}catch(rejectedValue){
 		res.send(rejectedValue)
 	}
-
 }
-module.exports={getUser,addUserctrl,deleteUserCtrl,addToCartCtrl}
+
+const removeFromCartCtrl=async(req,res)=>{
+	const { id,prodid } = req.params;
+	try{
+		data=await removeFromCart(id,prodid)
+		res.send(data)
+	}catch(rejectedValue){
+		res.send(rejectedValue)
+	}
+}
+module.exports={getUser,addUserCtrl,deleteUserCtrl,addToCartCtrl,removeFromCartCtrl}
