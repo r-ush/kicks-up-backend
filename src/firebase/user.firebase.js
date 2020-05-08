@@ -41,11 +41,14 @@ let getDoc = user.get()
 
 //delete user from userdb
 const deleteUser=(id)=>{
-  let deleteDoc = userdb.doc(id).delete().then(()=>{
-    console.log('deleted',id)
-  }).catch((err)=>{
-    console.log('Could not delete user',err)
-  });
+  return new Promise ((resolve,reject)=>{
+    let deleteDoc = userdb.doc(id).delete()
+    .then(()=>{
+      resolve(`User with ${id} has been deleted`)
+    }).catch((err)=>{
+      rejct('Could not delete user',err)
+    });
+  })
 }
 
 //add to cart
