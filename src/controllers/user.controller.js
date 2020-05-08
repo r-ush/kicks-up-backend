@@ -39,7 +39,7 @@ const addToCartCtrl=async(req,res)=>{
 		data=await addToCart(id,prodid)
 		res.send(data)
 	}catch(rejectedValue){
-		res.send(rejectedValue)
+		res.status(404).send(rejectedValue)
 	}
 }
 
@@ -49,7 +49,7 @@ const removeFromCartCtrl=async(req,res)=>{
 		data=await removeFromCart(id,prodid)
 		res.send(data)
 	}catch(rejectedValue){
-		res.send(rejectedValue)
+		res.status(404).send(rejectedValue)
 	}
 }
 module.exports={getUser,addUserCtrl,deleteUserCtrl,addToCartCtrl,removeFromCartCtrl}
