@@ -9,11 +9,10 @@ Database used is Firebase.
 
 Some basic Git commands are:
 
-`$ git clone https://github.com/mohamedsamara/mern-ecommerce.git`
-`$ cd project`
+`$ git clone https://github.com/r-ush/kicks-up-backend.git`
+`$ cd kicks-up-backend`
 `$ npm install`
-    
-  
+
 
 # Tools used :
 - Nodejs
